@@ -2,36 +2,40 @@
 
 <div class="home">
  
+  {{ if .IsHome }}
+  {{ partial "newposts.html" . }}
+  <hr>
+  <h2>Categories</h2>
+  {{ end }}
   
     <div class="row pack">
-
-        {{ $paginator := .Paginate (where .Site.RegularPages "Section" "posts") }}
-        {{ range $paginator.Pages }}   
+        {{ $paginator := .Paginate (where .Pages "Params.hidden" "ne" "true" ) }}
+      	{{ range $paginator.Pages }}   
             <div class="col-md-4 card">
              <a href="{{ .Permalink }}" class="index-anchor">    
                 <div class="panel panel-default">
                   
-                  {{ if .Params.img }}
-                  <img width="100%" src="{{ .Site.BaseURL }}images/{{ .Params.img }}" alt="{{ .Title }}">
+                  {{ if .Params.thumbnail }}
+                  <img width="100%" src="{{ .Permalink }}{{ .Params.thumbnail }}" alt="{{ .Title }}">
                   {{ else }}
-                  <img width="100%" src="{{ .Site.BaseURL }}images/{{ .Site.Params.defaultImage }}" alt="{{ .Site.Title }}">
+                  <img width="100%" src="{{ .Site.BaseURL }}images/{{ .Site.Params.defaultImage }}" alt="{{ .Title }}">
                   {{ end }}
                   
                   <div class="panel-body">
-                    <h3 class="panel-title pull-left">{{ .Title | truncate 25 }}</h3><span class="post-meta pull-right"><small>{{ .Date.Format "January 2, 2006" }}</small></span>
+                    <h3 class="panel-title pull-left">{{ .Title }}</h3><br/>
+		    <span class="post-meta pull-right"><small>{{ .Date.Format "January 2, 2006" }}</small></span>
                   </div>
                   
                   <div class="panel-body"><small>
-                    {{ .Summary | plainify | truncate 180 }}</small>
+                    {{ .Params.description }}</small>
                   </div>
                 </div>
                 </a>
             </div>
         
           {{ end }}
+          </div>
 
-    </div> 
-    
 <div class="row">
     <div class="col-md-4">  </div>
     <div class="col-md-4">

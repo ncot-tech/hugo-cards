@@ -15,7 +15,7 @@
 
     </article>
     <div class="row">
-        {{ if .Site.Params.disqus }}
+        {{ if .Site.Params.disqus.enable }}
          {{ partial "disqus.html" . }}
         {{ end }}
     </div>
@@ -37,6 +37,4 @@
 
 </div>
 
-
-{{ partial "fb-script.html" . }}
 {{ end }}

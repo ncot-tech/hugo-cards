@@ -1,29 +1,83 @@
-baseurl = "http://example.org/"
+baseURL = "https://ncot.uk/"
 languageCode = "en-us"
-title = "Hugo Cards"
+title = "NCoT Technology"
 theme = "hugo-cards"
-themesDir = "../.."
-paginate = 6
+summaryLength = 25
+disablePathToLower = true
 
 [params]
-  builtBy = "bool"
-  defaultImage = "gopher.jpg"
+  description = "Drink tea and make things"
+  name = "NCoT Technology"
+  email = "james@ncot.uk"
+  github = "https://github.com/ncot-tech"
+  kofi = "kofi-id-here"
+  youtube = "channel-id-here"
+  uphold = "uphold-id-here"
 
-  facebook = ""
-  quora = ""
-  twitter = "http://twitter.com/bul_ikana"
-  github = "http://github.com/bul-ikana"
-  email = ""
+[params.twitter]
+  username = "ncot_tech"
+  enable = "yes"
 
-  fbLikeBox = ""
-  fbAppId = ""
-  fbPageUrl = ""
-  fbPageTitle = ""
+[params.facebook]
+  enable = "yes"
+  appID = "123456"
+  pageUrl = "https://www.facebook.com/ncot.tech"
+  pageTitle = "NCoT Facebook"
 
-  analytics = ""
-  disqus = ""
+[params.google.adsense]
+  enable = "yes"
+  publisherID = "ca-pub-12345"
+[params.google.analytics]
+  enable = "yes"
+  trackingCode = "UA-12345"
 
-  [params.copyright]
-     name = "bool"
-     link = "https://bool.netlify.com"
+[params.disqus]
+  enable = "yes"
+  id = "whatever.disqus.com"
 
+## Main Menu
+[[menu.main]]
+    name = "Home"
+    weight = 1
+    url = "/"
+[[menu.main]]
+    name = "Blog"
+    weight = 2
+    url = "/blog"
+[[menu.main]]
+    name = "Sausage Factory Games"
+    weight = 3
+    url = "https://www.sausage-factory.games"
+
+[related]
+
+threshold = 80
+includeNewer = true
+toLower = false
+
+[[related.indices]]
+name = "Tags"
+weight = 80
+[[related.indices]]
+name = "Category"
+weight = 80
+[[related.indices]]
+name = "keywords"
+weight = 80
+[[related.indices]]
+name  = "date"
+weight = 10
+
+## Main Menu
+[[menu.main]]
+    name = "Home"
+    weight = 1
+    url = "/"
+[[menu.main]]
+    name = "Blog"
+    weight = 2
+    url = "/blog"
+[[menu.main]]
+    name = "Sausage Factory Games"
+    weight = 3
+    url = "https://www.sausage-factory.games"

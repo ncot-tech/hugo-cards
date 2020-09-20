@@ -2,22 +2,35 @@
 <meta name="robots" content="noodp"/>
 <link rel="canonical" href="{{ .Permalink }}" />
 
+{{ if .Site.Params.twitter.enable }}
+{{ partial "twitter.html" . }}
 <!-- Twitter Card -->
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:description" content="{{ if .Description }}{{ .Description | plainify }}{{ else }}{{if .IsPage}}{{ .Summary | plainify  }}{{ end }}{{ end }}" />
-<meta name="twitter:title" content="{{ .Title }}{{ if .IsHome }} - {{ .Site.Params.Tagline }}{{ else }} - {{ .Site.Title }}{{ end }}" />
-<meta name="twitter:site" content="{{ .Site.Params.twitter }}" />
-<meta name="twitter:creator" content="{{ .Site.Params.twitter }}" />
-
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="{{ .Site.Params.twitter.username }}" />
+<meta name="twitter:creator" content="{{ .Site.Params.twitter.username }}" />
+<meta name="twitter:image" content="{{ .Site.BaseURL }}{{- .File.Dir -}}{{ .Params.thumbnail }}" />
+{{ end }}
 <!-- OG data -->
-<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}" />
-<meta content="{{ .Title }}{{ if .IsHome }} - {{ .Site.Params.Tagline }}{{ else }} - {{ .Site.Title }}{{ end }}" property="og:title">
-<meta content="{{ if .Description }}{{ .Description | plainify }}{{ else }}{{if .IsPage}}{{ .Summary | plainify  }}{{ end }}{{ end }}" property="og:description">
-<meta property="og:url" content="{{ .Permalink }}" />
-<meta property="og:site_name" content="{{ .Site.Title }}" />
+<meta property="og:title" content="{{ .Title }}">
+<meta property="og:description" content="{{ .Params.description }}">
+<meta property="og:image" content="{{ .Site.BaseURL }}{{- .File.Dir -}}{{ .Params.thumbnail }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:type" content="article">
+<meta property="og:article:author:first_name"      content="James">
+<meta property="og:article:author:last_name"      content="Grimwood">
+<meta property="og:article:author:username"      content="ncot_tech">
 {{ range .Params.categories }}<meta property="article:section" content="{{ . }}" />{{ end }}
 {{ if isset .Params "date" }}<meta property="article:published_time" content="{{ time .Date }}" />{{ end }}
 
+{{ with .Site.Params.uphold }}
+<meta name="monetization" content="$ilp.uphold.com/{{ . }}">
+{{ end }}
+
+{{ with .Site.Params.youtube }}
+<script src="https://apis.google.com/js/platform.js"></script>
+{{ end }}
 <!-- JSON-LD -->
 {{ if .IsHome }}
 <script type="application/ld+json">
@@ -28,9 +41,9 @@
   "name": "{{ .Site.Title }}",
    "author": {
       "@type": "Person",
-      "name": "{{ .Site.Params.author }}"
+      "name": "James Grimwood"
     },
-  "description": "{{ .Site.Params.description }}",
+  "description": "Programming, electronics and making",
 }
 </script>
 {{ end }}
@@ -51,4 +64,31 @@
     }
  }
 </script>
+{{ end }}
+
+<script>
+window.addEventListener("load", function(){
+window.cookieconsent.initialise({
+  "palette": {
+    "popup": {
+      "background": "#000",
+      "text": "#33ff00"
+    },
+    "button": {
+      "background": "#0f0"
+    }
+  },
+  "position": "top",
+  "content": {
+    "message": "We use cookies to analyse site usage, enable social media sharing, and to display personalised adverts. This site does not store or $
+  }
+})});
+</script>
+
+{{ if .Site.Params.google.analytics.enable }}
+  {{ partial "analytics.html" . }}
+{{ end }}
+
+{{ if .Site.Params.google.adsense.enable }}
+  <script data-ad-client="{{ .Site.Params.google.adsense.publisherID }}" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 {{ end }}

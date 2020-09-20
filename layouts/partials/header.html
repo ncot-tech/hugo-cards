@@ -15,8 +15,22 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-        <li><a href="{{ .Site.BaseURL }}pages/about/">About</a></li>
-        <li><a href="{{ .Site.BaseURL }}pages/contact/">Contact</a></li>
+              {{ with .Site.Params.youtube }}
+              <li>
+                <div class="g-ytsubscribe" data-channelid="{{ . }}" data-layout="default" data-theme="light" data-count="hidden"></div>
+              </li>
+              {{ end }}
+              {{ with .Site.Params.kofi }}
+              <li>
+    <script type='text/javascript' src='https://ko-fi.com/widgets/widget_2.js'></script>
+        <script type='text/javascript'>kofiwidget2.init('Support Me on Ko-fi', '#29abe0', '{{ . }}');kofiwidget2.draw();</script>
+              </li>
+              {{ end }}
+		{{ range .Site.Menus.main }}
+                <li>
+                    <a href="{{ .URL }}">{{ .Name }}</a>
+                </li>
+                {{end}}
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Download <span class="caret"></span></a>
           <ul class="dropdown-menu">

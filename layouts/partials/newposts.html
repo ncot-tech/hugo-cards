@@ -1,0 +1,29 @@
+<hr>
+          <h2>Recent Content</h2>
+          <div class="row pack">
+          {{ range first 6 (where .Site.RegularPages "Section" "ne" "categories") }}   
+          
+            <div class="col-md-4 card">
+             <a href="{{ .Permalink }}" class="index-anchor">    
+                <div class="panel panel-default">
+                  
+                  {{ if .Params.thumbnail }}
+                  <img width="100%" src="{{ .Permalink }}{{ .Params.thumbnail }}" alt="{{ .Title }}">
+                  {{ else }}
+                  <img width="100%" src="{{ .Site.BaseURL }}images/{{ .Site.Params.defaultImage }}" alt="{{ .Title }}">
+                  {{ end }}
+                  
+                  <div class="panel-body">
+                    <h3 class="panel-title pull-left">{{ .Title }}</h3><br/>
+		    <span class="post-meta pull-right"><small>{{ .Date.Format "January 2, 2006" }}</small></span>
+                  </div>
+                  
+                  <div class="panel-body"><small>
+                    {{ .Params.description }}</small>
+                  </div>
+                </div>
+                </a>
+            </div>
+        
+          {{ end }}
+          </div>

@@ -1,0 +1,14 @@
+<div class="row">
+    {{ partial "fb-script.html" . }}
+    <h2>Did you like this post?</h2>
+    <p>if you did, it'd be really nice if you shared it</p>
+    <div class="fb-like" data-href="{{ .Permalink }}" data-layout="standard" data-action="recommend"
+        data-size="small" data-show-faces="true" data-share="true" data-colorscheme="light"></div>
+    {{ if .Site.Params.twitter.enable }}
+    <div>
+    <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-url="{{ .Permalink }}" data-related="{{ .Site.Params.twitter.username }}" 
+        data-show-count="true">Tweet</a>
+    </div>
+    {{ end }}
+
+</div> <!-- /row of widgets -->
